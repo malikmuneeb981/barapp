@@ -60,6 +60,28 @@ router.post("/addcategory", upload.single("image"), async (req, res, next) => {
     console.log(err);
   }
 });
+router.get("/getcategories",async (req, res, next) => {
+  try {
+    const category = await Category.find({})
+
+    if (!category) {
+      return res.status(400).json({
+        msg: "Something Went Wrong",
+        success: false,
+        categories: null,
+      });
+    } else {
+      return res.status(200).json({
+        msg: "Successfully Retrieved",
+        success: true,
+        categories: category,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+});
 router.post("/", async (req, res, next) => {
   const { title } = req.body;
   try {
