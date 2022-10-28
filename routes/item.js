@@ -94,7 +94,7 @@ router.post("/getitems",async(req,res,next)=>{
   try {
  
     const {title}=req.body
-    const finditem= await Item.findOne({
+    const finditem= await Item.find({
       category:title
     })
     if(!finditem)
