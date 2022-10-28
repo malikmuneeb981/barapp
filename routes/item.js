@@ -90,6 +90,39 @@ router.post("/additem",upload.single("image"),async(req,res,next)=>{
     next()
   }
 })
+router.post("/getitems",async(req,res,next)=>{
+  try {
+ 
+    const {title}=req.body
+    const finditem= await Item.findOne({
+      category:title
+    })
+    if(!finditem)
+    {
+      res.status(400).json({
+        msg:"Something went wrong",
+        success:false,
+        item:null
+      })
+    }
+    else
+    {
+      res.status(200).json({
+        msg: "Items Found",
+        success: true,
+        item: finditem,
+      });
+    }
+
+
+
+
+    
+  } catch (error) {
+    console.log(error);
+    next
+  }
+})
 
 
 
