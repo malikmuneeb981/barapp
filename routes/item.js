@@ -123,6 +123,29 @@ router.post("/getitems",async(req,res,next)=>{
     next
   }
 })
+router.get("/getallitems", async (req, res, next) => {
+  try {
+    
+    const finditem = await Item.find({});
+    if (!finditem) {
+      res.status(400).json({
+        msg: "Something went wrong",
+        success: false,
+        item: null,
+      });
+    } else {
+      res.status(200).json({
+        msg: "Items Found",
+        success: true,
+        item: finditem,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next;
+  }
+});
+
 
 
 
