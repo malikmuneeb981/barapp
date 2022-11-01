@@ -145,6 +145,75 @@ router.get("/getallitems", async (req, res, next) => {
     next;
   }
 });
+router.put("/updateitem/:id", upload.single("image"), async (req, res, next) => {
+  try {
+    const finditem = await Item.findById(req.params.id);
+    if (!finditem) {
+      return res.status(400).json({
+        msg: "No Item",
+        success: false,
+        item: null,
+      });
+    } else {
+      const updateitem = await Item.findByIdAndUpdate(
+        req.params.id,
+        {
+          title: req.body.title,
+          img: req.file.path,
+          price:req.body.price
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      if (!updateitem) {
+        return res.status(400).json({
+          msg: "Something went wrong",
+          success: false,
+          item: null,
+        });
+      }
+      return res.status(200).json({
+        msg: "Successfully updated",
+        success: true,
+        item: updateitem,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    next();
+  }
+});
+router.delete("/delitem/:id", async (req, res, next) => {
+  try {
+    const finditem = await Item.findById(req.params.id);
+    if (!finditem) {
+      res.status(400).json({
+        msg: "Item not found",
+        success: false,
+      });
+    } else {
+      const delcat = await Item.findByIdAndDelete(req.params.id);
+      if (!delcat) {
+        res.status(400).json({
+          msg: "Something went wrong",
+          success: false,
+        });
+      } else {
+        res.status(200).json({
+          msg: "Item Deleted successfully",
+          success: true,
+        });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+});
+//router.put("")
+
 
 
 

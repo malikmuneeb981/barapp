@@ -5,6 +5,7 @@ const colors = require("colors");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
 const server = express();
+server.use(morgan("dev"));
 server.use(express.json({}));
 server.use(
   express.json({
@@ -12,7 +13,7 @@ server.use(
   })
 );
 dotenv.config({ path: `./config/config.env` });
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 connectDB();
 
 server.use("/api/barapp/staff", require("./routes/category"));
