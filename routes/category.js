@@ -117,40 +117,34 @@ router.post("/", async (req, res, next) => {
     console.log(err);
   }
 });
-router.delete("/:id",async(req,res,next)=>{
+router.delete("/delcategory/:id", async (req, res, next) => {
   try {
-    const findcat= await Category.findById(req.params.id)
-    if(!findcat)
-    {
+    const findcat = await Category.findById(req.params.id);
+    if (!findcat) {
       res.status(400).json({
-        msg:"Category not found",
-        success:false,
-      })
-    }
-    else
-    {
-       const delcat=await Category.findByIdAndDelete(req.params.id)
-       if(!delcat)
-       {
+        msg: "Category not found",
+        success: false,
+      });
+    } else {
+      const delcat = await Category.findByIdAndDelete(req.params.id);
+      if (!delcat) {
         res.status(400).json({
-          msg:"Something went wrong",
-          success:false
-        })
-       }
-       else
-       {
+          msg: "Something went wrong",
+          success: false,
+        });
+      } else {
         res.status(200).json({
-          msg:"Category Deleted successfully",
-          success:true
-        })
-       }
+          msg: "Category Deleted successfully",
+          success: true,
+        });
+      }
     }
   } catch (error) {
     console.log(error);
-    next()
+    next();
   }
-})
-router.put("/:id", upload.single("image"), async (req, res, next) => {
+});
+router.put("/updatecategory/:id", upload.single("image"), async (req, res, next) => {
   try {
     const findcat = await Category.findById(req.params.id);
     if (!findcat) {
