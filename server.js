@@ -18,6 +18,7 @@ connectDB();
 
 server.use("/api/barapp/staff", require("./routes/category"));
 server.use("/api/barapp/staff", require("./routes/item"));
+server.use("/api/barapp/staff", require("./routes/buy"));
 // server.use("/api/todo", require("./routes/todo"));
 server.use("/uploads", express.static("uploads"));
 
