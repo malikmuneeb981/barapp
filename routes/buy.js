@@ -36,7 +36,7 @@ router.post('/buyitem',async(req,res,next)=>{
         console.log(error);
     }
 })
-router.get('/customerrecord',async(req,res,next)=>{
+router.post('/customerrecord',async(req,res,next)=>{
     try {
         const {lockernum}=req.body
         const record=await Buy.find({
