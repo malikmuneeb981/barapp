@@ -36,4 +36,32 @@ router.post('/buyitem',async(req,res,next)=>{
         console.log(error);
     }
 })
+router.get('/customerrecord',async(req,res,next)=>{
+    try {
+        const {lockernum}=req.body
+        const record=await Buy.find({
+            locknum:lockernum
+        })
+        if(!record)
+        {
+          return  res.status(200).json({
+                msg:"Record Not Found",
+                success:false,
+                record:null
+
+            })
+        }
+        else
+        {
+            return res.status(200).json({
+                msg:"Record Found",
+                success:true,
+                record:record
+            })
+        }
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
 module.exports=router
