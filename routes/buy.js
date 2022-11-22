@@ -64,4 +64,46 @@ router.post('/customerrecord',async(req,res,next)=>{
         console.log(error);
     }
 })
+router.delete('/delrecord',async(req,res,next)=>{
+
+
+    try{
+        const { lockernum } = req.body;
+        const findrecord= await Buy.find({
+            locknum:lockernum
+        })
+        if(!findrecord)
+        {
+            return res.status(200).json({
+                msg:"Record Not Found",
+                success:false,
+            
+            })
+        }
+        else
+        {
+            const delrecord = await Buy.deleteMany({ locknum: lockernum });
+            if(!delrecord)
+            {
+                res.status(400).json({
+                    msg:"Something went wrong",
+                    success:false
+                })
+                
+            }
+            else
+            {
+                res.status(200).json({
+                    msg:"Deleted Successfully",
+                    success:true
+                })
+            }
+        }
+
+    }
+    catch(error)
+    {
+        console.log(error);
+    }
+})
 module.exports=router
