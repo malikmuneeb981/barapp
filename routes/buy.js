@@ -9,7 +9,8 @@ router.post('/buyitem',async(req,res,next)=>{
      const buy=new Buy({
         locknum:req.body.locknum,
         item:req.body.item,
-        price:req.body.price
+        price:req.body.price,
+        ammount:req.body.ammount
      })
      await buy.save(function (err){
         if(err)
@@ -104,6 +105,13 @@ router.delete('/delrecord',async(req,res,next)=>{
     catch(error)
     {
         console.log(error);
+    }
+})
+router.get('/getallrecord',async(req,res,next)=>{
+    try {
+        const findall=Buy.f
+    } catch (error) {
+        
     }
 })
 module.exports=router
