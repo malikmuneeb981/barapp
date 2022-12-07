@@ -131,11 +131,4 @@ router.delete('/delrecord',async(req,res,next)=>{
         console.log(error);
     }
 })
-router.get('/getallrecord',async(req,res,next)=>{
-    try {
-        const findall=Buy.f
-    } catch (error) {
-        
-    }
-})
 module.exports=router
