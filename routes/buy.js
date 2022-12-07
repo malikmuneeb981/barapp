@@ -45,7 +45,7 @@ router.post('/customerrecord',async(req,res,next)=>{
         })
         if(!record)
         {
-          return  res.status(200).json({
+          return  res.status(400).json({
                 msg:"Record Not Found",
                 success:false,
                 record:null
@@ -65,6 +65,30 @@ router.post('/customerrecord',async(req,res,next)=>{
         console.log(error);
     }
 })
+router.get('/geteveryrecord', async (req, res)=> {
+        var arr = [];
+        Buy.find({}, function (err, docs) {
+           
+            if(err)
+            {
+            console.log(err);
+            }
+            else
+            {
+            for(var doc in docs)
+            {
+
+                return res.json({
+                    docs:docs
+                })
+               
+            }
+            }
+            
+           
+        });
+   
+});
 router.delete('/delrecord',async(req,res,next)=>{
 
 
@@ -105,13 +129,6 @@ router.delete('/delrecord',async(req,res,next)=>{
     catch(error)
     {
         console.log(error);
-    }
-})
-router.get('/getallrecord',async(req,res,next)=>{
-    try {
-        const findall=Buy.f
-    } catch (error) {
-        
     }
 })
 module.exports=router
